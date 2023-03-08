@@ -1,5 +1,7 @@
 // app.js
-import { tag } from "./html.js";
+import { ethers } from "./ethers.esm.min.js";
 
-const h1 = tag("h1", "👋 Hello Modules!");
-console.log("hi");
+export async function main() {
+  const wallet = await ethers.Wallet.createRandom();
+  console.log(`wallet address: ${await wallet.getAddress()}`);
+}

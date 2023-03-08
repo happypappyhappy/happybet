@@ -95,6 +95,12 @@
     </ul>
 
     <hr />
-    <script type="module" src="app.js"></script>
+    <script type="module">
+      import { main } from "./app.js";
+
+      main().catch((error) => {
+        console.error(`error: ${JSON.stringify(error)}`);
+      });
+    </script>
   </body>
 </html>
