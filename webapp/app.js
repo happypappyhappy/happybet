@@ -1,24 +1,87 @@
 // app.js
 import { ethers } from "./ethers.esm.min.js";
+import { getAbi } from "./contract.js";
+
+const chainId = 0xa33;
+const address = "0x146f34662FF54Da689c4B8312f1ed7789c9f9A20";
+
+let provider = {};
+let signer = {};
 
 const connectWallet = async () => {
-  console.log("connect wallet");
+  if (!window.ethereum) {
+    alert("Requires wallet to play!!!");
+    return;
+  }
+
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+
+  if (window.ethereum.chainId !== chainId) {
+    try {
+      await switchNetwork();
+    } catch (error) {
+      await addNetwork();
+    }
+  }
+  signer = provider.getSigner();
+};
+
+const switchNetwork = async () => {
+  await provider.send("wallet_switchEthereumChain", [
+    {
+      chainId: "0xa33",
+    },
+  ]);
+};
+
+const addNetwork = async () => {
+  await provider.send("wallet_addEthereumChain", [
+    {
+      chainId: "0xa33",
+      rpcUrls: ["https://dataseed2.redlightscan.finance"],
+      chainName: "Redlight Finance Mainnet",
+      nativeCurrency: {
+        name: "REDLC",
+        symbol: "REDLC",
+        decimals: 18,
+      },
+      blockExplorerUrls: ["https://redlightscan.finance/"],
+    },
+  ]);
 };
 
 const betOne = async () => {
-  console.log("bet one");
+  const contract = new ethers.Contract(address, getAbi(), signer);
+  const txResp = await contract.makeBet({
+    value: ethers.utils.parseUnits("1.0"),
+  });
+  console.log(JSON.stringify(txResp));
 };
 
 const betTwo = async () => {
-  console.log("bet two");
+  const contract = new ethers.Contract(address, getAbi(), signer);
+  const txResp = await contract.makeBet({
+    value: ethers.utils.parseUnits("2.0"),
+  });
+  console.log(JSON.stringify(txResp));
 };
 
 const forceRoll = async () => {
-  console.log("forceRoll");
+  const contract = new ethers.Contract(address, getAbi(), signer);
+  const txResp = await contract.roll({
+    value: ethers.utils.parseUnits("1.0"),
+  });
+  console.log(JSON.stringify(txResp));
 };
 
 const setRandomSeed = async () => {
-  console.log("set random seed");
+  const random = Math.random().toString().slice(2, 22);
+  const contract = new ethers.Contract(address, getAbi(), signer);
+  const txResp = await contract.setRandomSeed(random, {
+    value: ethers.utils.parseUnits("2.0"),
+  });
+  console.log(JSON.stringify(txResp));
 };
 
 export async function main() {
@@ -29,7 +92,12 @@ export async function main() {
         console.log("done");
       })
       .catch((error) => {
-        console.error(`error in betOne: ${JSON.stringify(error)}`);
+        if (error.data.message === "Upfront cost exceeds account balance") {
+          alert("Error: Not enough REDLC (requires 1 REDLC)");
+        } else {
+          alert("Unknown error! Check console for more detail");
+          console.error(JSON.stringify(error));
+        }
       });
   };
 
@@ -40,7 +108,12 @@ export async function main() {
         console.log("done");
       })
       .catch((error) => {
-        console.error(`error in betTwoBtn: ${JSON.stringify(error)}`);
+        if (error.data.message === "Upfront cost exceeds account balance") {
+          alert("Error: Not enough REDLC (requires 2 REDLC)");
+        } else {
+          alert("Unknown error! Check console for more detail");
+          console.error(JSON.stringify(error));
+        }
       });
   };
 
@@ -51,7 +124,12 @@ export async function main() {
         console.log("done");
       })
       .catch((error) => {
-        console.error(`error in forceRollBtn: ${JSON.stringify(error)}`);
+        if (error.data.message === "Upfront cost exceeds account balance") {
+          alert("Error: Not enough REDLC (requires 1 REDLC)");
+        } else {
+          alert("Unknown error! Check console for more detail");
+          console.error(JSON.stringify(error));
+        }
       });
   };
 
@@ -62,7 +140,12 @@ export async function main() {
         console.log("done");
       })
       .catch((error) => {
-        console.error(`error in setRandomSeedBtn: ${JSON.stringify(error)}`);
+        if (error.data.message === "Upfront cost exceeds account balance") {
+          alert("Error: Not enough REDLC (requires 2 REDLC)");
+        } else {
+          alert("Unknown error! Check console for more detail");
+          console.error(JSON.stringify(error));
+        }
       });
   };
 
