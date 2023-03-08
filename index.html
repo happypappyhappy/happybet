@@ -17,10 +17,9 @@
 
     <h2>PLAY</h2>
 
-    <p>
-      You never knew it, but it’s easy to improve reliability on your site.
-      Here’s how.
-    </p>
+    <p>Make bet and maybe you win! Maybe you lose!</p>
+
+    <hr />
 
     <h2>Is easy for play:</h2>
 
@@ -40,6 +39,45 @@
       <li>When lose, you lose bet</li>
       <li>When win, you win original bet + share of lose pool</li>
       <li>All onchain. Contract verify. Open source.</li>
+    </ul>
+
+    <hr />
+
+    <h2>How set new randomSeed:</h2>
+
+    <ul>
+      <li>Call <em>setRandomSeed</em> function on contract</li>
+      <li>Fee for set new random seed 2 REDLC</li>
+      <li>Anyone may set new random seed!!! Make wild fun</li>
+    </ul>
+
+    <hr />
+
+    <h2>How get winning:</h2>
+
+    <ul>
+      <li>Call <em>withdraw</em> function on contract</li>
+      <li>Withdraw all you winning to you in 1 transaction</li>
+    </ul>
+
+    <hr />
+
+    <h2>How payout calculate:</h2>
+
+    <ul>
+      <li>Take bets of loser, put in pool</li>
+      <li>House take 10% of loser pool</li>
+      <li>Remaining loser pool split evenly between winners</li>
+    </ul>
+
+    <hr />
+
+    <h2>How roll work:</h2>
+
+    <ul>
+      <li>Hash <em>randomSeed</em> with block height and block timestamp</li>
+      <li>Convert hash uint256</li>
+      <li>Mod 2 uint256 to set s even or odd</li>
     </ul>
   </body>
 </html>
