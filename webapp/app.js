@@ -14,7 +14,7 @@ const betTwo = async () => {
 };
 
 const forceRoll = async () => {
-  console.log("bet forceRoll");
+  console.log("forceRoll");
 };
 
 const setRandomSeed = async () => {
@@ -23,16 +23,48 @@ const setRandomSeed = async () => {
 
 export async function main() {
   const betOneBtn = document.getElementById("bet1Btn");
-  betOneBtn.onclick = await betOne();
+  betOneBtn.onclick = () => {
+    betOne()
+      .then(() => {
+        console.log("done");
+      })
+      .catch((error) => {
+        console.error(`error in betOne: ${JSON.stringify(error)}`);
+      });
+  };
 
   const betTwoBtn = document.getElementById("bet2Btn");
-  betTwoBtn.onclick = await betTwo();
+  betTwoBtn.onclick = () => {
+    betTwo()
+      .then(() => {
+        console.log("done");
+      })
+      .catch((error) => {
+        console.error(`error in betTwoBtn: ${JSON.stringify(error)}`);
+      });
+  };
 
   const forceRollBtn = document.getElementById("forceRollBtn");
-  forceRollBtn.onclick = await forceRoll();
+  forceRollBtn.onclick = () => {
+    forceRoll()
+      .then(() => {
+        console.log("done");
+      })
+      .catch((error) => {
+        console.error(`error in forceRollBtn: ${JSON.stringify(error)}`);
+      });
+  };
 
   const setRandomSeedBtn = document.getElementById("setRandomSeedBtn");
-  setRandomSeedBtn.onclick = await setRandomSeed();
+  setRandomSeedBtn.onclick = () => {
+    setRandomSeed()
+      .then(() => {
+        console.log("done");
+      })
+      .catch((error) => {
+        console.error(`error in setRandomSeedBtn: ${JSON.stringify(error)}`);
+      });
+  };
 
   await connectWallet();
 }
