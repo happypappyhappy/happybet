@@ -3,7 +3,7 @@ import { ethers } from "./ethers.esm.min.js";
 import { getAbi } from "./contract.js";
 
 const chainId = 0xa33;
-const contractAddress = "0x146f34662FF54Da689c4B8312f1ed7789c9f9A20";
+const contractAddress = "0xd71EC16C2f7FA606f218B393EDbf2018FE15991F";
 
 let provider = {};
 let signer = {};
