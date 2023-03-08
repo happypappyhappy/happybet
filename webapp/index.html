@@ -40,20 +40,25 @@
     <h2>Is easy for play:</h2>
 
     <ul>
-      <li>Make bet with 1 REDLC or 2 REDLC</li>
-      <li>Wait more bet other players</li>
+      <li>Place a bet with 1 REDLC or 2 REDLCc</li>
+      <li>Wait for 50 bets to be placed</li>
       <ul>
-        <li>After 50 bet, <em>Roll()</em> happen automatic</li>
-        <li>Can also call <em>Roll()</em>manual, but cost 1 REDLC</li>
+        <li>
+          After 50 bets are placed, <em>Roll()</em> is called automatically
+        </li>
+        <li>
+          You can also call <em>Roll()</em> manually without waiting for 50
+          bets, but cost 1 REDLC
+        </li>
       </ul>
-      <li><em>Roll()</em> determine by random if ODD or EVEN</li>
-      <li>When ODD, bet of 1 REDLC win</li>
-      <li>When EVEN, bet of 2 REDLC win</li>
-      <li>When lose, you lose bet</li>
-      <li>When win, you win original bet + share of lose pool</li>
+      <li><em>Roll()</em> determine randomly to set ODD or EVEN</li>
+      <li>When <em>Roll()</em> is ODD, players who bet 1 REDLC win</li>
+      <li>When <em>Roll()</em> is EVEN, players who bet 2 REDLC win</li>
+      <li>When you lose, you lose the REDLC you bet</li>
+      <li>When you win, you win original bet + share of lose pool</li>
       <li>House take 10% of loser pool</li>
-      <li>All onchain. Contract verify. Open source.</li>
-      <li>All action emit event on chain. Transparent.</li>
+      <li>All onchain. Contract is verified. Open source.</li>
+      <li>All actions emit an event on chain. Transparent.</li>
     </ul>
 
     <hr />
