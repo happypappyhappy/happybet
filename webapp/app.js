@@ -58,7 +58,7 @@ const betOne = async () => {
   const contract = new ethers.Contract(contractAddress, getAbi(), signer);
   const txResp = await contract.makeBet({
     value: ethers.utils.parseUnits("1.0"),
-    gasLimit: "500000",
+    gasLimit: "2500000",
   });
   console.log(JSON.stringify(txResp));
 };
@@ -67,7 +67,7 @@ const betTwo = async () => {
   const contract = new ethers.Contract(contractAddress, getAbi(), signer);
   const txResp = await contract.makeBet({
     value: ethers.utils.parseUnits("2.0"),
-    gasLimit: "500000",
+    gasLimit: "2500000",
   });
   console.log(JSON.stringify(txResp));
 };
@@ -76,7 +76,7 @@ const forceRoll = async () => {
   const contract = new ethers.Contract(contractAddress, getAbi(), signer);
   const txResp = await contract.roll({
     value: ethers.utils.parseUnits("1.0"),
-    gasLimit: "500000",
+    gasLimit: "2500000",
   });
   console.log(JSON.stringify(txResp));
 };
